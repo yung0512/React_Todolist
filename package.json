@@ -2,7 +2,7 @@
   "name": "todolist_byhook",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://github.io/yung0512/React_Todolist",
+  "homepage": "http://yung0512.github.io/React_Todolist",
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
