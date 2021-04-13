@@ -10,12 +10,15 @@ function EditTodoForm ({editTodo,id,task,toggleEditForm}){
             editTodo(id,value)
             reset();
             toggleEditForm();
-        }}>
+        }}
+            style={{marginLeft:"1rem",width:"50%"}}
+        >
             <TextField 
                 maring="normal"
                 value={value} 
                 onChange={handleChange} 
                 fullWidth
+                autoFocus
             />
         </form>
     )

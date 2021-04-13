@@ -1,4 +1,5 @@
-import React ,{useState}from 'react'
+import React ,{useEffect}from 'react'
+import useTodoState from './hooks/useTodoState'
 import Typography from '@material-ui/core/Typography'
 import Paper from '@material-ui/core/Paper'
 import AppBar from '@material-ui/core/AppBar'
@@ -6,29 +7,13 @@ import TodoList from './TodoList'
 import TodoForm from './TodoForm'
 import Toolbar from '@material-ui/core/Toolbar'
 import Grid from '@material-ui/core/Grid'
-import uuid from 'uuid/dist/v4'
 function TodoApp(){
-    const initialTodos = [
-        {id:1,task:"Clean Fishtank",completed:false},
-        {id:2,task:"jogging 3000m",completed:true},
-        {id:3,task:"feed cats",completed:false}
-    ]
-    const [todos, setTodos] = useState(initialTodos)
-    const addTodo = newTodoText => {
-        setTodos([...todos,{id:uuid(),task:newTodoText,completed:false}])
-    }
-    const removeTodo = todoId =>{
-        const updatedTodos = todos.filter( todo=> todo.id !== todoId);
-        setTodos(updatedTodos);
-    }
-    const toggleTodo = todoId => {
-        const updatedTodos = todos.map(todo => todo.id===todoId?{...todo,completed:!todo.completed}:todo)
-        setTodos(updatedTodos)
-    }
-    const editTodo = (todoId,newTask) => {
-        const updatedTodos = todos.map(todo => todo.id===todoId?{...todo,task:newTask}:todo)
-        setTodos(updatedTodos)
-    }
+    const initialTodos = [{ id: 1, task: "Pet a Monkey", completed: false}]
+    const{todos,addTodo,removeTodo,toggleTodo,editTodo} = useTodoState(initialTodos)
+    
+    useEffect(()=>{
+        window.localStorage.setItem("todos",JSON.stringify(todos),[todos])
+    })//useEffect is triggerd when the todoapp is rerender ,use second argument to specify useeffect track which state
     return (
         <Paper
             style={{
